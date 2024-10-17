@@ -1,0 +1,27 @@
+body {
+    margin: 0;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    flex: 1; 
+    min-height: 100vh; 
+}
+
+.konten {
+    flex: 1; 
+}
+
+#footer {
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: black;
+    color: white;
+    margin-top: auto; 
+}
