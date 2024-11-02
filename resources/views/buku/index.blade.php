@@ -45,11 +45,18 @@
                         </form>
                             <button><a href="{{ route('buku.edit', $buku->id) }}">Edit?</a></button>
                         </div>
-                    </td>                        
+                    </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
         <p style="text-align:right"><a href="{{ route('buku.create') }}">Tambah Buku</a></p>
+        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                            >Logout</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                            </form>
     </body>
 </html>

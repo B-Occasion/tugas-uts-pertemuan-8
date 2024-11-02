@@ -2,11 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use GrahamCampbell\ResultType\Success;
 
 Route::get('/', function () {
-    return view('auth/login');
-})->name('auth/login');
+    return view('welcome');
+})->name('welcome');
 
 Route::get('/home', function () {
     return view('home');
@@ -20,13 +22,15 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/buku', [BukuController::class, 'index'])->name('buku');
-    Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
-    Route::post('/buku', [BukuController::class, 'store'])->name('buku.store');
-    Route::get('/buku/{id}/edit', [BukuController::class, 'edit'])->name('buku.edit');
-    Route::put('/buku/{id}', [BukuController::class, 'update'])->name('buku.update');
-    Route::delete('/buku/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
+Route::get('restricted', function () {
+    // Check if session is properly set
+    session()->flash('success', 'You are of age');
+    return view('auth.dashboard');
+})->middleware('checkage');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::resource('buku', BukuController::class);
+    Route::resource('users', UserController::class);
 });
 
 Route::controller(LoginRegisterController::class)->group(function() {
@@ -48,3 +52,5 @@ Route::get('/about', function () {
 Route::get('/master', function () {
     return view('master');
 });
+
+
