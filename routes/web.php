@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\LoginRegisterController;
+use App\Http\Controllers\GalleryController;
 use GrahamCampbell\ResultType\Success;
 
 Route::get('/', function () {
@@ -53,4 +54,5 @@ Route::get('/master', function () {
     return view('master');
 });
 
+Route::resource('gallery', GalleryController::class);
 
